@@ -63,7 +63,7 @@
     top: 20px;
     right: 20px;
     bottom: 20px;
-    left: 50%;
+    left: calc(var(--left) + 20px);
     overflow: hidden;
     border: solid 1px grey;
     box-shadow: 0 0 10px rgba(128, 128, 128, 0.646);
