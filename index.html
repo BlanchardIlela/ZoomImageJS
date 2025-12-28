@@ -8,27 +8,28 @@
     <script src="app.js" type="module" defer></script>
 </head>
 <body>
-    <article class="product">
-        <div class="product__images">
-            <a href="/img/bateau.jpg" class="active">
+    <article class="product js-product">
+        <div class="product__images js-images">
+            <a href="/img/bateau.jpg" data-medium="/img/bateau_medium.jpg" class="active">
                 <img src="/img/bateau_small.jpg" alt="Petite image">
             </a>
-            <a href="/img/horse.jpg">
+            <a href="/img/horse.jpg" data-medium="/img/horse_medium.jpg">
                 <img src="/img/horse_small.jpg" alt="Petite image">
             </a>
-            <a href="/img/scribe.jpg">
+            <a href="/img/scribe.jpg" data-medium="/img/scribe_medium.jpg">
                 <img src="/img/scribe_small.jpg" alt="Petite image">
             </a>
-            <a href="/img/whip.jpg">
+            <a href="/img/whip.jpg" data-medium="/img/whip_medium.jpg">
                 <img src="/img/whip_small.jpg" alt="Petite image">
             </a>
-            <a href="/img/bateau_landscape.jpg">
+            <a href="/img/bateau_landscape.jpg" data-medium="/img/bateau_landscape_medium.jpg">
                 <img src="/img/bateau_landscape_small.jpg" alt="Petite image">
             </a>
         </div>
 
         <div class="product__image">
-            <img src="/img/bateau_medium.jpg" alt="">
+            <img src="/img/bateau_medium.jpg" alt="" class="js-image-medium">
+            <div class="product__magnifier js-magnifier"></div>
         </div>
         <div class="product__info">
             <h1>@la_mini_taverne</h1>
@@ -37,6 +38,9 @@
                 MP pour les tarifs de commissions <br>
                 Photos par @la_taverne_aux_images
             </p>
+        </div>
+        <div class="product__zoom">
+            <img src="/img/bateau.jpg" alt="" class="js-image-large">
         </div>
     </article>
 </body>
