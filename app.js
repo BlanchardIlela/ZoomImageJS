@@ -10,10 +10,13 @@ class ProductViewer {
     constructor(element) {
         this.#mediumImage = element.querySelector('.js-image-medium')
         this.#thumbnailWrapper = element.querySelector('.js-images')
+
         const links = this.#thumbnailWrapper.querySelectorAll('a')
         for (const link of links) {
             link.addEventListener('click', this.#onThumbnailClick.bind(this))
         }
+        element.querySelector('.js-image-medium')
+            .addEventListener('mouseenter', this.#onEnter.bind(this))
     }
 
     /**
@@ -27,6 +30,10 @@ class ProductViewer {
         e.currentTarget.classList.add('active')
         const medium = e.currentTarget.dataset.medium
         this.#mediumImage.src = medium
+    }
+
+    #onEnter (e) { 
+        
     }
 
 }
