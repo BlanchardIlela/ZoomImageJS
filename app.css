@@ -3,12 +3,32 @@
     line-height: 1.5;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .product {
+    margin: 20px;
     display: grid;
-    grid-template-columns: 40px 330px 1fr;
+    grid-template-columns: 42px 330px 1fr;
     gap: 20px;
 }
 
 .product img {
     display: block;
+}
+
+.product__images {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.product__images a {
+    border: solid 1px grey;
+}
+
+.product__images .active {
+    border-color: yellow;
+    box-shadow:  0 0 0 2px rgba(214, 214, 16, 0.652);
 }
