@@ -5,6 +5,7 @@ class ProductViewer {
     #largeImageSRC
     #thumbnailWrapper
     #zoomElement
+    #magnifier
 
     /**
      * 
@@ -15,7 +16,7 @@ class ProductViewer {
         this.#thumbnailWrapper = element.querySelector('.js-images')
         this.#zoomElement = element.querySelector('.js-zoom')
         this.#largeImage = element.querySelector('.js-image-large')
-
+        this.#magnifier = element.querySelector('.js-magnifier')
 
         const links = this.#thumbnailWrapper.querySelectorAll('a')
         this.#largeImageSRC = links[0].getAttribute('href')
@@ -24,7 +25,7 @@ class ProductViewer {
         }
             this.#mediumImage.addEventListener('mouseenter', this.#onEnter.bind(this))
             this.#mediumImage.addEventListener('mouseleave', this.#onLeave.bind(this))
-
+            this.#largeImage.addEventListener('load', this.#updateRatio.bind(this))
     }
 
     /**
@@ -58,6 +59,21 @@ class ProductViewer {
      */
     #onLeave (e) { 
         this.#zoomElement.classList.remove('active')
+       
+    }
+
+    /**
+     * 
+     * @param {PointerEvent} e 
+     */
+    #updateRatio (e) {
+        const zoomReact = this.#zoomElement.getBoundingClientRect()
+        const ratio = {
+            width: zoomReact.width / this.#largeImage.width,
+            height: zoomReact.height / this.#largeImage.height
+        }
+        this.#magnifier.style.setProperty('width', `${ratio.width * 100}%`)
+        this.#magnifier.style.setProperty('height', `${ratio.height * 100}%`)
     }
 
 }
