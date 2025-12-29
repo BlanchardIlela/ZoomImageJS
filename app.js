@@ -25,6 +25,7 @@ class ProductViewer {
         }
             this.#mediumImage.addEventListener('mouseenter', this.#onEnter.bind(this))
             this.#mediumImage.addEventListener('mouseleave', this.#onLeave.bind(this))
+            this.#mediumImage.addEventListener('mousemove', this.#onMove.bind(this))
             this.#largeImage.addEventListener('load', this.#updateRatio.bind(this))
     }
 
@@ -59,6 +60,14 @@ class ProductViewer {
      */
     #onLeave (e) { 
         this.#zoomElement.classList.remove('active')
+       
+    }
+
+    /**
+     * 
+     * @param {PointerEvent} e 
+     */
+    #onMove (e) { 
        
     }
 
