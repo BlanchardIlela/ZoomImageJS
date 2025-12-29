@@ -2,6 +2,7 @@ class ProductViewer {
 
     #mediumImage
     #largeImage
+    #largeImageSRC
     #thumbnailWrapper
     #zoomElement
 
@@ -17,6 +18,7 @@ class ProductViewer {
 
 
         const links = this.#thumbnailWrapper.querySelectorAll('a')
+        this.#largeImageSRC = links[0].getAttribute('href')
         for (const link of links) {
             link.addEventListener('click', this.#onThumbnailClick.bind(this))
         }
@@ -36,6 +38,7 @@ class ProductViewer {
         e.currentTarget.classList.add('active')
         const medium = e.currentTarget.dataset.medium
         this.#mediumImage.src = medium
+        this.#largeImageSRC = e.currentTarget.getAttribute('href')
     }
 
     /**
@@ -45,6 +48,7 @@ class ProductViewer {
     #onEnter (e) { 
         this.#zoomElement.classList.add('active')
         const rect = this.#mediumImage.getBoundingClientRect()
+        this.#largeImage.setAttribute('src', this.#largeImageSRC)
         this.#zoomElement.style.setProperty('--left', `${rect.x + rect.width}px`)
     }
 
