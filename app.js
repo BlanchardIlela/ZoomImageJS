@@ -1,3 +1,5 @@
+import { clamp } from "./functions/math.js"
+
 class ProductViewer {
 
     #mediumImage
@@ -6,6 +8,7 @@ class ProductViewer {
     #thumbnailWrapper
     #zoomElement
     #magnifier
+    #ratio = {width: 1, height: 1}
 
     /**
      * 
@@ -68,13 +71,29 @@ class ProductViewer {
      * @param {PointerEvent} e 
      */
     #onMove (e) { 
+        const cursorRatio = {
+            x: e.offsetX / this.#mediumImage.width, 
+            y: e.offsetY / this.#mediumImage.height
+       }
+       const magnifierRactio = {
+            x: clamp((cursorRatio.x - this.#ratio.width / 2), 0, 1 - this.#ratio.width),
+            y: clamp((cursorRatio.y - this.#ratio.height / 2), 0, 1 - this.#ratio.height)
+       }
         this.#magnifier.style.setProperty(
             'transform',
-            `translate3d(calc(${e.offsetX}px - 50%), calc(${e.offsetY}px - 50%), 0)`
+            `translate3d(
+                ${magnifierRactio.x * this.#mediumImage.width}px,
+                ${magnifierRactio.y * this.#mediumImage.height}px,
+                0
+            )`
         )
-       console.log(
-        e.offsetX / this.#mediumImage.width, 
-        e.offsetY / this.#mediumImage.height
+        this.#largeImage.style.setProperty(
+            'transform',
+            `translate3d(
+                -${magnifierRactio.x * 100}%,
+                -${magnifierRactio.y * 100}%,
+                0
+            )`
         )
     }
 
@@ -84,12 +103,12 @@ class ProductViewer {
      */
     #updateRatio (e) {
         const zoomReact = this.#zoomElement.getBoundingClientRect()
-        const ratio = {
+        this.#ratio = {
             width: zoomReact.width / this.#largeImage.width,
             height: zoomReact.height / this.#largeImage.height
         }
-        this.#magnifier.style.setProperty('width', `${ratio.width * 100}%`)
-        this.#magnifier.style.setProperty('height', `${ratio.height * 100}%`)
+        this.#magnifier.style.setProperty('width', `${this.#ratio.width * 100}%`)
+        this.#magnifier.style.setProperty('height', `${this.#ratio.height * 100}%`)
     }
 
 }
