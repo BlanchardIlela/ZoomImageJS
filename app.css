@@ -35,6 +35,7 @@
 
 .product__image {
     position: relative;
+    align-self: flex-start;
 }
 
 .product__magnifier {
