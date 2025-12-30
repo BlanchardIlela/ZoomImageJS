@@ -70,7 +70,7 @@ class ProductViewer {
     #onMove (e) { 
         this.#magnifier.style.setProperty(
             'transform',
-            `translate3d(${e.offsetX}px, ${e.offsetY}px, 0)`
+            `translate3d(calc(${e.offsetX}px - 50%), calc(${e.offsetY}px - 50%), 0)`
         )
        console.log(
         e.offsetX / this.#mediumImage.width, 
