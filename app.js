@@ -2,6 +2,7 @@ import { clamp } from "./functions/math.js"
 
 class ProductViewer {
 
+    #element
     #mediumImage
     #largeImage
     #largeImageSRC
@@ -20,6 +21,7 @@ class ProductViewer {
         this.#zoomElement = element.querySelector('.js-zoom')
         this.#largeImage = element.querySelector('.js-image-large')
         this.#magnifier = element.querySelector('.js-magnifier')
+        this.#element = element
 
         const links = this.#thumbnailWrapper.querySelectorAll('a')
         this.#largeImageSRC = links[0].getAttribute('href')
@@ -53,6 +55,7 @@ class ProductViewer {
     #onEnter (e) { 
         this.#zoomElement.classList.add('active')
         const rect = this.#mediumImage.getBoundingClientRect()
+        this.#element.classList.remove('image-loaded')
         this.#largeImage.setAttribute('src', this.#largeImageSRC)
         this.#zoomElement.style.setProperty('--left', `${rect.x + rect.width}px`)
     }
@@ -109,6 +112,7 @@ class ProductViewer {
         }
         this.#magnifier.style.setProperty('width', `${this.#ratio.width * 100}%`)
         this.#magnifier.style.setProperty('height', `${this.#ratio.height * 100}%`)
+        this.#element.classList.add('image-loaded')
     }
 
 }
